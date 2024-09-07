@@ -1,41 +1,21 @@
 package Controller;
 
 import DTO.CoordenadorDTO;
-import View.TelaCadastroAluno;
+import View.TelaCadastrarCoordenador;
+import View.TelaLogin;
+import View.TelaMenuCoordenador;
 
 public class Programa {
 	public static void main(String[] args) {
-		// new TelaCadastroAluno();
-
 		CoordenadorDTO coordenadorDto = new CoordenadorDTO();
-		coordenadorDto.setNome("Cleyton");
-		coordenadorDto.setEmail("Cleyton@gmail.com");
-		coordenadorDto.setSenha("1234");
-
 		CoordenadorController coordenadorControler = new CoordenadorController();
 
-		// verificar se ja existe um coordenador
-		if (coordenadorControler.coordenaodorExiste(coordenadorDto)) {
-			System.out.println("Coordenador ja existe!");
+		// Verifica se já existe um coordenador
+		if (!coordenadorControler.coordenaodorExiste(coordenadorDto)) {
+			new TelaCadastrarCoordenador(); // Exibe a tela de cadastro para criar o coordenador
 		} else {
-			System.out.println("Não existe coordenador, criando coordenador!");
-			// criando coordenador
-			if (coordenadorControler.criarCoordenador(coordenadorDto)) {
-				System.out.println("Coordenador adicionado com sucesso!");
-			}
+			// Se já existir, redireciona para a tela de login
+			new TelaLogin();
 		}
-
-		coordenadorDto.setNome("Cleyton Souza");
-
-		if (coordenadorControler.editarCoordenador(coordenadorDto)) {
-			System.out.println("Coordenador editado");
-		}
-
-		CoordenadorDTO coordenadorDto2 = new CoordenadorDTO();
-		coordenadorDto2 = coordenadorControler.verCoordenador(coordenadorDto2);
-		System.out.println(coordenadorDto2.getNome());
-		System.out.println(coordenadorDto2.getEmail());
-		System.out.println(coordenadorDto2.getSenha());
-
 	}
 }
